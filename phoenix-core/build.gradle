@@ -1,0 +1,52 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    testImplementation "junit:junit:${junitVersion}"
+    androidTestImplementation "com.android.support.test:runner:${testRunnerVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${testEspressoVersion}"
+
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+//    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+
+    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJavaVersion"
+    api "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+}
+
+publish {
+    userOrg = 'guoxiaoxing'
+    groupId = 'com.github.guoxiaoxing'
+    artifactId = 'phoenix-core'
+    publishVersion = "$rootProject.ext.phoenixCoreVersion"
+    desc = 'The one-stop solution for image/video selection, editing and compression on the Android platform.'
+    website = 'https://github.com/guoxiaoxing/phoenix'
+}

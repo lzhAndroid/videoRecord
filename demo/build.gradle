@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.guoxiaoxing.phoenix.demo"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    testImplementation "junit:junit:${junitVersion}"
+    androidTestImplementation "com.android.support.test:runner:${testRunnerVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${testEspressoVersion}"
+
+    implementation "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+    implementation "com.android.support:multidex:${multiDexVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
+
+    implementation ("com.github.bumptech.glide:glide:${glideVersion}") {
+        exclude group:'com.android.support'
+    }
+    implementation('com.github.guoxiaoxing:toolkit:1.0.0') {
+        exclude group:'com.android.support'
+    }
+
+    //图片/视频库
+    implementation "com.github.guoxiaoxing:phoenix:$rootProject.ext.phoenixVerson"
+    implementation "com.github.guoxiaoxing:phoenix-compress-picture:$rootProject.ext.phoenixVerson"
+    implementation "com.github.guoxiaoxing:phoenix-compress-video:$rootProject.ext.phoenixVerson"
+
+    //图片/视频库
+//    implementation project(':phoenix-ui')
+//    implementation project(':phoenix-compress-video')
+//    implementation project(':phoenix-compress-picture')
+}
